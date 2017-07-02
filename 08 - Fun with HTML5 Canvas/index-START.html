@@ -7,6 +7,7 @@
 <body>
 <canvas id="draw" width="800" height="800"></canvas>
 <script>
+//script was modified compared to the original one, as an draft of another project based on this exercise
 const canvas = document.querySelector('#draw');
 //get context for canvas
 const ctx = canvas.getContext('2d');
@@ -15,17 +16,18 @@ canvas.height = window.innerHeight;
 ctx.strokeStyle = '#BADA55';
 ctx.lineJoin = 'round';
 ctx.lineCap = 'round';
-ctx.lineWidth = 30;
+ctx.lineWidth = 25;
 
 let isDrawing = false;
 let lastX = 0;
 let lastY = 0;
-let hue = 0;
-let direction = true;
+let hue = 100;
+let hueIncrement = true;
+let strokeIncrement = true;
 
 function draw(e) {
   if (!isDrawing) return; //stop functions from running, when mouse button isn't pressed down
-  ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+  ctx.strokeStyle = `hsla(245, ${hue}%, 50%, 0.84)`;
   ctx.beginPath();
   //start from
   ctx.moveTo(lastX, lastY);
@@ -33,15 +35,18 @@ function draw(e) {
   ctx.lineTo(e.offsetX, e.offsetY);
   ctx.stroke();
   [lastX, lastY] = [e.offsetX, e.offsetY];
-  hue > 359 ? hue = 0 : hue++;
-  if (ctx.lineWidth >= 30 || ctx.lineWidth <= 5) {
-    direction = !direction;
+  // hue >= 100 ? hue = 0 : hue++;
+  if (ctx.lineWidth >= 25 || ctx.lineWidth <= 5) {
+    strokeIncrement = !strokeIncrement;
   }
-  if (direction) {
+  if (strokeIncrement) {
     ctx.lineWidth++;
+    hue++;
   } else {
     ctx.lineWidth--;
+    hue--;
   }
+  console.log(hue);
 }
 
 
