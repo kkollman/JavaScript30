@@ -57,16 +57,20 @@
     // Find the comment with this ID
     // delete the comment with the ID of 823423
 
+    //ex. 1 - delete the object from current array
     const index = comments.findIndex(comment => (comment.id === 823423));
     console.log(index);
     comments.splice(index, 1);
 
-    const newComments = [
-      ...comments.slice(0, index),
-      ...comments.slice(index, +1)
 
-    ];
-    console.log(newComments);
+    //ex. 2 - use alternatively! Create a copy of current array, ommiting selected object
+    // const newComments = [
+    //   ...comments.slice(0, index),
+    //   ...comments.slice(index +1)
+    //
+    // ];
+    //
+    // console.log(newComments);
   </script>
 </body>
 </html>
